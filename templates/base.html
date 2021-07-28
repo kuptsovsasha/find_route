@@ -1,3 +1,4 @@
+{% url  'cities:home' as cities_home_url%}
 <!doctype html>
 <html lang="en">
   <head>
@@ -15,14 +16,14 @@
   <body>
       <nav class=" container navbar navbar-expand-lg navbar-dark bg-dark ">
       <div class="container">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand " href="{% url 'home'%}">FindRoute</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <li class="nav-item  ">
+              <a class="nav-link  {% if request.path == cities_home_url %} active {% endif %} " aria-current="page" href="{% url 'cities:home'%}">City</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Features</a>
