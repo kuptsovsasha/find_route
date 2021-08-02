@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %} Train {% endblock %}
+
+{% block content %}
+
+ <h1>Train</h1>
+<div class="row">
+    <div class="col-md">
+         <table class="table table-striped">
+                <tr>
+                  <th scope="col">Number</th>
+                  <th scope="col">From</th>
+                  <th scope="col">To</th>
+                  <th scope="col">Time on road</th>
+
+                </tr>
+
+                <p>
+                    <tr>
+                        <td>
+
+                           {{object.name}}
+                        </td>
+                        <td>{{ object.from_city }}</td>
+                        <td>{{ object.to_city }}</td>
+                        <td>{{ object.travel_time}}</td>
+
+
+
+                    </tr>
+                </p>
+
+        </table>
+
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <a href=" {% url 'trains:home' %}">
+        <button type="button" class="btn btn-light"> Back to list </button>
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+

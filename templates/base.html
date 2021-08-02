@@ -1,4 +1,8 @@
 {% url  'cities:home' as cities_home_url%}
+{% url  'trains:home' as trains_home_url%}
+{% url  'cities:create' as cities_create_url%}
+{% url  'trains:create' as trains_create_url%}
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -15,6 +19,7 @@
   </head>
   <body>
       <nav class=" container navbar navbar-expand-lg navbar-dark bg-dark ">
+
       <div class="container">
         <a class="navbar-brand " href="{% url 'home'%}">FindRoute</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,25 +31,53 @@
               <a class="nav-link  {% if request.path == cities_home_url %} active {% endif %} " aria-current="page" href="{% url 'cities:home'%}">City</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
+              <a class="nav-link{% if request.path == trains_home_url %} active {% endif %} " aria-current="page" href="{% url 'trains:home'%}">Train</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Pricing</a>
             </li>
-            <li class="nav-item dropdown">
+
+            <li class="nav-item dropdown  {% if request.path == cities_create_url or request.path == trains_create_url %} active  {% endif %} ">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown link
+                Add
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" href="{% url 'cities:create'%}">New city</a></li>
+                <li><a class="dropdown-item" href="{% url 'trains:create'%}">New train</a></li>
+
               </ul>
             </li>
           </ul>
         </div>
       </div>
     </nav>
+      <div class="container">
+          <div class="row">
+            <div class="col-md-8 mx-auto my-4">
+              {% if messages %}
+
+                      {% for message in messages %}
+
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        {{ message }}
+                                      </div>
+                                    {% else %}
+                                      <div class="alert alert-success alert-dismissible fade show " role="alert">
+                                        {{ message }}
+                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                      </div>
+                                {% endif %}
+
+
+
+                      {% endfor %}
+
+              {% endif %}
+            </div>
+          </div>
+        </div>
     <div class="container">
     {% block content %}{% endblock %}
     </div>
